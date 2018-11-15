@@ -1,6 +1,6 @@
 <div class="header">
 	<div class="headerleft">
-		<b>clinic Management System</b>
+		<b>clinics Management System</b>
 	</div>
 	<div class="headerright">
 		<b>
