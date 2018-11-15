@@ -24,13 +24,14 @@ elseif (!empty($_SESSION['bursar'])&&!empty($_SESSION['type'])) {
 	<style type="text/css">
 	body
 	{
-		background-color:green;
+		background-color: #;
+		background: url("9.jpg");
 	}
 		.wrapper
 		{
 			height: 250px;
 			width: 700px;
-			background-color: white;
+			background-color: violet;
 			border: 1px solid #C2C5BA;
 			margin: 0 auto;
 			margin-top: 150px;
@@ -42,7 +43,7 @@ elseif (!empty($_SESSION['bursar'])&&!empty($_SESSION['type'])) {
 			border-right: 1px solid #C2C5BA;
 			float: left;
 			font-family: Arial;
-			font-size: 25px;
+			font-size: 30px;
 			text-align: center;
 			padding-top: 80px;
 		}
@@ -70,7 +71,7 @@ elseif (!empty($_SESSION['bursar'])&&!empty($_SESSION['type'])) {
 			height: 35px;
 			width: 90%;
 			border: 0;
-			background-color:green;
+			background-color: #408080;
 			margin: 0;
 			color: white;
 			font-weight: bold;
@@ -86,8 +87,8 @@ elseif (!empty($_SESSION['bursar'])&&!empty($_SESSION['type'])) {
 	<div class="right">
 		<h3>Login Here</h3><hr>
 		<form action="index.php" method="post">
-			<input type="text" class="input" name="username" placeholder="Enter Username"><br><br>
-			<input type="password" class="input" name="password" placeholder="Enter Password"><br><br>
+			<input type="text" class="input" name="username" placeholder="Enter Username" required style="border-radius:20px 20px 20px 20px; font-size:20px; width:250px;  border:5px solid black; font-family:Times new roman;"><br><br>
+			<input type="password" class="input" name="password" placeholder="Enter Password" required style="border-radius:20px 20px 20px 20px; font-size:20px; width:250px;  border:5px solid black; font-family:Times new roman;"><br><br>
 			<input type="submit" class="btn" name="btn" value="Login"><br>
 		</form>
 <?php
