@@ -23,6 +23,7 @@ if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 				<tr>
 					<th>Madicine Name</th>
 					<th>Price</th>
+					<th>save record</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
