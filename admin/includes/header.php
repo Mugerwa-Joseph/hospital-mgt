@@ -1,6 +1,6 @@
 <div class="header">
 	<div class="headerleft">
-		<b>HopYs Management System</b>
+		<b>HopYsa Management System</b>
 	</div>
 	<div class="headerright">
 		<b>
