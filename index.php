@@ -20,7 +20,7 @@ elseif (!empty($_SESSION['bursar'])&&!empty($_SESSION['type'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hospital Management System</title>
+	<title>Edited Hospital Management System</title>
 	<style type="text/css">
 	body
 	{
