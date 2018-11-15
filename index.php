@@ -28,12 +28,12 @@ elseif (!empty($_SESSION['bursar'])&&!empty($_SESSION['type'])) {
 	}
 		.wrapper
 		{
-			height: 250px;
-			width: 700px;
-			background-color: white;
-			border: 1px solid #C2C5BA;
-			margin: 0 auto;
-			margin-top: 150px;
+	height: 250px;
+	width: 700px;
+	background-color: #CCC;
+	border: 1px solid #C2C5BA;
+	margin: 0 auto;
+	margin-top: 150px;
 		}
 		.left
 		{
@@ -84,12 +84,19 @@ elseif (!empty($_SESSION['bursar'])&&!empty($_SESSION['type'])) {
 		Hospital Management System<br><br>(HMS)
 	</div>
 	<div class="right">
-		<h3>Login Here</h3><hr>
+	  <h3>Login Here</h3><hr>
 		<form action="index.php" method="post">
 			<input type="text" class="input" name="username" placeholder="Enter Username"><br><br>
 			<input type="password" class="input" name="password" placeholder="Enter Password"><br><br>
 			<input type="submit" class="btn" name="btn" value="Login"><br>
-		</form>
+            
+            
+           <label class="inline">
+			<input type="checkbox" class="ace" />
+			<span class="lbl"> Remember Me</span>
+			</label> 
+	  </form>
+        
 <?php
 		extract($_POST);
 		if (isset($btn) && !empty($username) && !empty($password)) {
