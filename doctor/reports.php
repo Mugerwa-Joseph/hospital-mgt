@@ -25,6 +25,47 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 		.statistics p b{
 		margin-left: 35%;
 		}
+		.btn{
+  background-color: #004A7F;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-animation: glowing 3000ms infinite;
+  -moz-animation: glowing 3000ms infinite;
+  -o-animation: glowing 3000ms infinite;
+  animation: glowing 3000ms infinite;
+}
+@-webkit-keyframes glowing {
+  0% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -webkit-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+}
+
+@-moz-keyframes glowing {
+  0% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -moz-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+}
+
+@-o-keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
+
+@keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
 		</style>
 </head>
 <body>
@@ -35,7 +76,7 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 	 ?>
 		<div class="right">
 		<div class="statistics">
-			<h4 align="center">My Patients Statistics</h4><hr>
+			<h4 align="center" style="color:blue;">My Patients Statistics</h4><hr>
 			<p><b>Today:</b> <?php
 			require_once "../includes/connect.php";
 			
@@ -145,7 +186,8 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 			<option>2018</option>
 			<option>2019</option>
 			<option>2020</option>
-			</select>&nbsp;&nbsp;<input type="submit" value="View Report" class="btnlink">
+			</select>&nbsp;&nbsp;<button class="btn" type="submit" >view Report</button>
+			<button style="background:orange;color:white;height:30px; " onclick="myfunction()">print report</button>
 		</form><br>
 		<?php
 		if ($_SERVER['REQUEST_METHOD']=="POST") {
@@ -189,4 +231,9 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 		 ?>
 	</div>
 </body>
+<script>
+	function myfunction(){
+		window.print();
+	}
+</script>
 </html>
