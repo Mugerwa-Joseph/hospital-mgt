@@ -1,6 +1,6 @@
 <div class="header">
 	<div class="headerleft">
-		<b>Hospital Management System</b>
+		<b>HopY Management System</b>
 	</div>
 	<div class="headerright">
 		<b>
