@@ -39,7 +39,7 @@ if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 				$id = $_GET['id'];
 				$sql = mysql_query("SELECT * FROM `medication` WHERE `id`='$id'");
 				while ($row=mysql_fetch_array($sql)) {
-					echo "Give him/her the following Medicine: <br><b>".$row['medical']."</b>";
+					echo "Give him/her the following Medicine: <give/her prescription<br><b>".$row['medical']."</b>";
 					
 				}
 				 ?><br><br>
