@@ -1,0 +1,44 @@
+version: '3.3'
+services:
+  php:
+    build:
+      context: .
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - ./src/:/var/www/html/
+    ports:
+      - '3000:80'
+    container_name: php_hms
+  mysql:
+    container_name: mysql_hms
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    image: mysql:8.0
+    networks:
+      - backend
+    environment:
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hms
+      MYSQL_PASSWORD: dev
+    ports:
+      - 3306:3306
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.8
+    depends_on:
+      - mysql
+    networks:
+      - backend
+    ports:
+      - 3001:80
+    environment:
+      PMA_HOST: mysql_hms
+      PMA_PORT: 3306
+    volumes:
+      - /sessions
+    container_name: phpmyadmin_hms
+networks:
+  frontend:
+  backend:
