@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -27,13 +27,13 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 			<center>
 				<form action="settings.php" method="POST">
 				<input type="text" name="username" class="form" value="<?php echo $name; ?>" required="required" disabled="disabled"><br><br>
-				
-				
-				<?php 
+
+
+				<?php
 				require_once '../includes/connect.php';
 				$sql = "SELECT * FROM `users` WHERE `username`='$name' AND `type`='$type'";
-				$query = mysql_query($sql);
-				while ($row = mysql_fetch_array($query)) {
+				$query = mysqli_query($con,$sql);
+				while ($row = mysqli_fetch_array($query)) {
 					?>
 					<input type="text" name="fname" class="form" value="<?php echo $row['fname']; ?>" required="required"><br><br>
 					<input type="text" name="sname" class="form" value="<?php echo $row['sname']; ?>" required="required"><br><br>
@@ -44,7 +44,7 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 				 ?>
 				<input type="submit" value="Update" class="btnlink" name="btn">
 			</form>
-			<?php 
+			<?php
 			extract($_POST);
 			if (isset($btn) && !empty($fname)&& !empty($sname)&& !empty($password)&& !empty($password2)) {
 				if ($password != $password2) {
@@ -54,12 +54,12 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 					require "../includes/bursar.php";
 					settings();
 				}
-				
+
 			}
 			 ?>
 			</center>
 			</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

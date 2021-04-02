@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -8,7 +8,7 @@ else{
 
 	require_once "../includes/connect.php";
 	$sql = "DELETE FROM `rooms` WHERE `room_no`='$id'";
-	$query = mysql_query($sql);
+	$query = mysqli_query($con,$sql);
 	if (!empty($query)) {
 		header("Location: rooms.php");
 	}

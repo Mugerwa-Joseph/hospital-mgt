@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -46,12 +46,12 @@ if (empty($_SESSION['reception']) OR empty($_SESSION['type'])) {
 				require_once "../includes/connect.php";
 
 				$sql = "SELECT * FROM `patient`";
-				$query = mysql_query($sql);
-				echo "<br><b style='color:#408080; font-family:Arial; font-size:35px;'>".$row = mysql_num_rows($query)."</b>"; 
+				$query = mysqli_query($con,$sql);
+				echo "<br><b style='color:#408080; font-family:Arial; font-size:35px;'>".$row = mysqli_num_rows($query)."</b>";
 				 ?>
 			</div>
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

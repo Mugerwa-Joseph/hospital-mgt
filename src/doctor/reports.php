@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -38,37 +38,37 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 			<h4 align="center">My Patients Statistics</h4><hr>
 			<p><b>Today:</b> <?php
 			require_once "../includes/connect.php";
-			
+
 			$username = $_SESSION['doctor'];
 			$day = date('d');
 			$month = date('m');
 			$year = date('Y');
-				
+
 				$sql = "SELECT * FROM `doctorreport` WHERE `date`='$day' AND `month`='$month' AND `year`='$year' AND `doctor_username`='$username'";
-				$result = mysql_query($sql);
+				$result = mysqli_query($con,$sql);
 				if (!empty($result)) {
-					echo mysql_num_rows($result);	
-					
+					echo mysqli_num_rows($result);
+
 				}
 				else{
-					echo mysql_error();
+					echo mysqli_error($con);
 				}
-				
+
 			?> Patients</p>
 			<p><b>This Month:</b> <?php
 			require_once "../includes/connect.php";
 			$day = date('d');
 			$month = date('m');
 			$year = date('Y');
-				
+
 				$sql = "SELECT * FROM `doctorreport` WHERE  `month`='$month' AND `year`='$year' AND `doctor_username`='$username'";
-				$result = mysql_query($sql);
+				$result = mysqli_query($con,$sql);
 				if (!empty($result)) {
-					echo mysql_num_rows($result);	
-					
+					echo mysqli_num_rows($result);
+
 				}
 				else{
-					echo mysql_error();
+					echo mysqli_error($con);
 				}
 			?> Patients</p>
 			<p><b>This Year:</b> <?php
@@ -76,15 +76,15 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 			$day = date('d');
 			$month = date('m');
 			$year = date('Y');
-				
+
 				$sql = "SELECT * FROM `doctorreport` WHERE  `month`='$month' AND `year`='$year' AND `doctor_username`='$username'";
-				$result = mysql_query($sql);
+				$result = mysqli_query($con,$sql);
 				if (!empty($result)) {
-					echo mysql_num_rows($result);	
-					
+					echo mysqli_num_rows($result);
+
 				}
 				else{
-					echo mysql_error();
+					echo mysqli_error($con);
 				}
 			?> Patients</p>
 		</div>
@@ -154,20 +154,20 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 			$day = trim(htmlspecialchars($_POST['day']));
 			$month = trim(htmlspecialchars($_POST['month']));
 			$year = trim(htmlspecialchars($_POST['year']));
-			
+
 
 			if (!empty($day) AND !empty($month) AND !empty($year)) {?>
 			<br>
 				<h3 align="center"><?php echo $day.'/'.$month.'/'.$year; ?> Sales:
 				<?php
 				$sql = "SELECT * FROM `doctorreport` WHERE `date`='$day' AND `month`='$month' AND `year`='$year' AND `doctor_username`='$username'";
-				$result = mysql_query($sql);
+				$result = mysqli_query($con,$sql);
 				if (!empty($result)) {
-					echo mysql_num_rows($result);	
-					
+					echo mysqli_num_rows($result);
+
 				}
 				else{
-					echo mysql_error();
+					echo mysqli_error($con);
 				}
 			?>
 			 Patients
@@ -181,10 +181,10 @@ if (empty($_SESSION['doctor']) OR empty($_SESSION['type'])) {
 		}
 		?>
 		</center>
-		
-			
+
+
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

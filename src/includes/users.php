@@ -1,18 +1,18 @@
-<?php 
+<?php
 function login()
 {
 	require_once 'connect.php';
-	$username = mysql_real_escape_string($_POST['username']);
-	$password = mysql_real_escape_string($_POST['password']);
+	$username = mysqli_real_escape_string($con,$_POST['username']);
+	$password = mysqli_real_escape_string($con,$_POST['password']);
 	$pass = sha1($password);
 	$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `password`='$pass'";
-	$query = mysql_query($sql);
-	$row = mysql_num_rows($query);
+	$query = mysqli_query($con, $sql);
+	$row = mysqli_num_rows ($query);
 	if ($row == 0) {
 		echo "<b style='font-size:12px;'>Wrong Username/Password Combination</b>";
 	}
 	elseif ($row == 1) {
-		$fetch = mysql_fetch_array($query);
+		$fetch = mysqli_fetch_array($query);
 		$type = $fetch['type'];
 		$name = $fetch['username'];
 		if ($type == "Admin") {
@@ -71,11 +71,12 @@ function logout()
 function admindetails()
 {
 	@session_start();
+	global $con;
 	$type = $_SESSION['type'];
 	$username = $_SESSION['admin'];
 	$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `type`='$type'";
-	$query = mysql_query($sql);
-	while ($row =mysql_fetch_array($query)) {
+	$query = mysqli_query($con, $sql);
+	while ($row =mysqli_fetch_array($query)) {
 		echo "Welcome, <i>".$row['fname']." ".$row['sname']."</i> (<a href='../logout.php'>Logout</a>)";
 	}
 }
@@ -83,11 +84,12 @@ function admindetails()
 function bursardetails()
 {
 	@session_start();
+	global $con;
 	$type = $_SESSION['type'];
 	$username = $_SESSION['bursar'];
 	$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `type`='$type'";
-	$query = mysql_query($sql);
-	while ($row =mysql_fetch_array($query)) {
+	$query = mysqli_query($con, $sql);
+	while ($row =mysqli_fetch_array($query)) {
 		echo "Welcome, <i>".$row['fname']." ".$row['sname']."</i> (<a href='../logout.php'>Logout</a>)";
 	}
 }
@@ -96,11 +98,12 @@ function bursardetails()
 function doctordetails()
 {
 	@session_start();
+	global $con;
 	$type = $_SESSION['type'];
 	$username = $_SESSION['doctor'];
 	$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `type`='$type'";
-	$query = mysql_query($sql);
-	while ($row =mysql_fetch_array($query)) {
+	$query = mysqli_query($con, $sql);
+	while ($row =mysqli_fetch_array($query)) {
 		echo "Welcome, <i>".$row['fname']." ".$row['sname']."</i> (<a href='../logout.php'>Logout</a>)";
 	}
 }
@@ -108,11 +111,12 @@ function doctordetails()
 function receptiondetails()
 {
 	@session_start();
+	global $con;
 	$type = $_SESSION['type'];
 	$username = $_SESSION['reception'];
 	$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `type`='$type'";
-	$query = mysql_query($sql);
-	while ($row =mysql_fetch_array($query)) {
+	$query = mysqli_query($con, $sql);
+	while ($row =mysqli_fetch_array($query)) {
 		echo "Welcome, <i>".$row['fname']." ".$row['sname']."</i> (<a href='../logout.php'>Logout</a>)";
 	}
 }
@@ -120,11 +124,12 @@ function receptiondetails()
 function laboratorydetails()
 {
 	@session_start();
+	global $con;
 	$type = $_SESSION['type'];
 	$username = $_SESSION['laboratory'];
 	$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `type`='$type'";
-	$query = mysql_query($sql);
-	while ($row =mysql_fetch_array($query)) {
+	$query = mysqli_query($con, $sql);
+	while ($row =mysqli_fetch_array($query)) {
 		echo "Welcome, <i>".$row['fname']." ".$row['sname']."</i> (<a href='../logout.php'>Logout</a>)";
 	}
 }
@@ -132,13 +137,12 @@ function laboratorydetails()
 function pharmacydetails()
 {
 	@session_start();
+	global $con;
 	$type = $_SESSION['type'];
 	$username = $_SESSION['pharmacy'];
 	$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `type`='$type'";
-	$query = mysql_query($sql);
-	while ($row =mysql_fetch_array($query)) {
+	$query = mysqli_query($con, $sql);
+	while ($row =mysqli_fetch_array($query)) {
 		echo "Welcome, <i>".$row['fname']." ".$row['sname']."</i> (<a href='../logout.php'>Logout</a>)";
 	}
 }
-
-?>

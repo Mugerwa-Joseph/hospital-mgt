@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function settings()
 {
@@ -14,13 +14,13 @@ function settings()
 		$pass = sha1($password);
 		$name = $_SESSION['bursar'];
 		$type = $_SESSION['type'];
-			
+
 				$sql = "UPDATE `users` SET `fname`='$fname',`sname`='$sname',`password`='$pass' WHERE `username`='$name' AND `type`='$type'";
-				$query = mysql_query($sql);
+				$query = mysqli_query($con,$sql);
 				if (!empty($query)) {
 					echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Updated</b>";
 
-				}	
+				}
 		}
 	}
 

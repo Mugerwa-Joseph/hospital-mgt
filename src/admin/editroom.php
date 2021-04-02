@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -27,13 +27,13 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 			<center>
 				<form action="editroom.php?id=<?php echo $id; ?>" method="POST">
 				<input type="text" name="number" class="form" value="<?php echo $id; ?>" required="required" disabled="disabled"><br><br>
-				
-				
-				<?php 
+
+
+				<?php
 				require_once '../includes/connect.php';
 				$sql = "SELECT * FROM `rooms` WHERE `room_no`='$id'";
-				$query = mysql_query($sql);
-				while ($row = mysql_fetch_array($query)) {
+				$query = mysqli_query($con,$sql);
+				while ($row = mysqli_fetch_array($query)) {
 					?>
 					<input type="text" name="name" class="form" value="<?php echo $row['room_name']; ?>" required="required"><br><br>
 					<?php
@@ -41,7 +41,7 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 				 ?>
 				<input type="submit" value="Update" class="btnlink" name="btn">
 			</form>
-			<?php 
+			<?php
 			extract($_POST);
 			if (isset($btn) && !empty($name)) {
 				require "../includes/admin.php";
@@ -49,9 +49,9 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 			}
 			 ?>
 			</center>
-			
+
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -37,24 +37,24 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 					<option>Pharmacy</option>
 					<option>Laboratory</option>
 				</select><br><br>
-				
-				<?php 
+
+				<?php
 				require_once '../includes/connect.php';
 				$sql = "SELECT * FROM `users` WHERE `username`='$name'";
-				$query = mysql_query($sql);
-				while ($row = mysql_fetch_array($query)) {
+				$query = mysqli_query($con,$sql);
+				while ($row = mysqli_fetch_array($query)) {
 					?>
 					<input type="text" name="fname" class="form" value="<?php echo $row['fname']; ?>" required="required"><br><br>
 					<input type="text" name="sname" class="form" value="<?php echo $row['sname']; ?>" required="required"><br><br>
 					<?php
 				}
 				 ?>
-				
-				
+
+
 				<input type="password" name="password" class="form" placeholder="Enter Password" required="required"><br><br>
 				<input type="submit" value="Update" class="btnlink" name="btn">
 			</form>
-			<?php 
+			<?php
 			extract($_POST);
 			if (isset($btn) && !empty($password) &&!empty($type)) {
 				require "../includes/admin.php";
@@ -62,9 +62,9 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 			}
 			 ?>
 			</center>
-			
+
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>
