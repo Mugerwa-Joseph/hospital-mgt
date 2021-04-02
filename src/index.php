@@ -1,22 +1,28 @@
 <?php
 session_start();
 if (!empty($_SESSION['admin'])&&!empty($_SESSION['type'])) {
-	header("Location: admin/");
+    header("Location: admin/");exit;
 }
 elseif (!empty($_SESSION['laboratory'])&&!empty($_SESSION['type'])) {
-	header("Location: laboratory/");
+	header("Location: laboratory/");exit;
 }
 elseif (!empty($_SESSION['doctor'])&&!empty($_SESSION['type'])) {
-	header("Location: doctor/");
+	header("Location: doctor/");exit;
 }
 elseif (!empty($_SESSION['reception'])&&!empty($_SESSION['type'])) {
-	header("Location: reception/");
+	header("Location: reception/");exit;
 }
 elseif (!empty($_SESSION['bursar'])&&!empty($_SESSION['type'])) {
-	header("Location: reception/");
+	header("Location: reception/");exit;
+}
+
+extract($_POST);
+$loginError = '';
+if (isset($btn) && !empty($username) && !empty($password)) {
+    require 'includes/users.php';
+    login();
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,13 +96,7 @@ elseif (!empty($_SESSION['bursar'])&&!empty($_SESSION['type'])) {
 			<input type="password" class="input" name="password" placeholder="Enter Password"><br><br>
 			<input type="submit" class="btn" name="btn" value="Login"><br>
 		</form>
-<?php
-		extract($_POST);
-		if (isset($btn) && !empty($username) && !empty($password)) {
-			require 'includes/users.php';
-		 	login();
-		 } 
-		 ?>
+        <?=$loginError?>
 	</div>
 </div>
 </body>

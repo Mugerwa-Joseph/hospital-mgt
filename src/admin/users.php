@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
-if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
-	header("Location: ../index.php");
+if (empty($_SESSION['admin']) || empty($_SESSION['type'])) {
+	header("Location: ../index.php");exit;
 }
 ?>
 <!DOCTYPE html>
@@ -26,13 +26,13 @@ if (empty($_SESSION['admin']) OR empty($_SESSION['type'])) {
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
-				<?php 
+				<?php
 				require '../includes/admin.php';
 				users();
 				 ?>
 			</table>
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>
