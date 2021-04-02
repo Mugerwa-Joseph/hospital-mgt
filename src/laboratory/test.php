@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['laboratory']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -20,27 +20,27 @@ if (empty($_SESSION['laboratory']) OR empty($_SESSION['type'])) {
 		<div class="right">
 			<br>
 			<center>
-			<?php 
+			<?php
 				require '../includes/connect.php';
 				$id = $_GET['id'];
-				$sql = mysql_query("SELECT * FROM `medication` WHERE `id`='$id'");
-				while ($row=mysql_fetch_array($sql)) {
+				$sql = mysqli_query($con,"SELECT * FROM `medication` WHERE `id`='$id'");
+				while ($row=mysqli_fetch_array($sql)) {
 					$idd = $row['patient_id'];
-					
-					$sql1 = mysql_query("SELECT * FROM `patient` WHERE `id`='$idd'");
-					while ($roww = mysql_fetch_array($sql1)) {
+
+					$sql1 = mysqli_query($con,"SELECT * FROM `patient` WHERE `id`='$idd'");
+					while ($roww = mysqli_fetch_array($sql1)) {
 						echo "<h4 align='center'><u>".$roww['fname']." ".$roww['sname']."</u></h4>";
 					}
 				}
 				 ?><br>
 
-				 <?php 
+				 <?php
 				@require '../includes/connect.php';
 				$id = $_GET['id'];
-				$sql = mysql_query("SELECT * FROM `medication` WHERE `id`='$id'");
-				while ($row=mysql_fetch_array($sql)) {
+				$sql = mysqli_query($con,"SELECT * FROM `medication` WHERE `id`='$id'");
+				while ($row=mysqli_fetch_array($sql)) {
 					echo "Please Test The following Disease: <br><b>".$row['tests']."</b>";
-					
+
 				}
 				 ?><br><br>
 				<form action="test.php?id=<?php echo $id = $_GET['id']; ?>" method="POST">
@@ -49,10 +49,10 @@ if (empty($_SESSION['laboratory']) OR empty($_SESSION['type'])) {
 
 				<textarea required="required" name="results" id="results" class="form" style="height:200px; padding-left:20px;padding-top:20px;font-family:Arial;" placeholder=""></textarea>
 				<br><br>
-				
+
 				<input type="submit" value="Send To Doctor" class="btnlink" name="btn"><br><br>
 			</form>
-			<?php 
+			<?php
 			extract($_POST);
 			if (isset($btn) && !empty($results)&&!empty($price)) {
 				require "../includes/laboratory.php";
@@ -61,7 +61,7 @@ if (empty($_SESSION['laboratory']) OR empty($_SESSION['type'])) {
 			 ?>
 			</center>
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

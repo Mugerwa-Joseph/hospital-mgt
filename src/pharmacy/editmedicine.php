@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -24,16 +24,16 @@ if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 				<input type="text" name="name" class="form" value="
 				<?php require "../includes/connect.php";
 				$id = $_GET['id'];
-				$sql = mysql_query("SELECT * FROM `medicine` WHERE `id`='$id'");
-				while ($row = mysql_fetch_array($sql)) {
+				$sql = mysqli_query($con,"SELECT * FROM `medicine` WHERE `id`='$id'");
+				while ($row = mysqli_fetch_array($sql)) {
 				 	echo trim(htmlspecialchars($row['medicine_name']));
 				 } ?>
 				" required="required"><br><br>
 				<input type="text" name="price" class="form" value="
 				<?php @require "../includes/connect.php";
 				$id = $_GET['id'];
-				$sql = mysql_query("SELECT * FROM `medicine` WHERE `id`='$id'");
-				while ($row = mysql_fetch_array($sql)) 
+				$sql = mysqli_query($con,"SELECT * FROM `medicine` WHERE `id`='$id'");
+				while ($row = mysqli_fetch_array($sql))
 				{
 				 	echo $row['price'];
 				 }
@@ -41,7 +41,7 @@ if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 				 " required="required"><br><br>
 				<input type="submit" value="Update" class="btnlink" name="btn">
 			</form>
-			<?php 
+			<?php
 			extract($_POST);
 			if (isset($btn) && !empty($name) && !empty($price)) {
 				require "../includes/pharmacy.php";
@@ -49,9 +49,9 @@ if (empty($_SESSION['pharmacy']) OR empty($_SESSION['type'])) {
 			}
 			 ?>
 			</center>
-			
+
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

@@ -12,10 +12,10 @@ services:
       - '3000:80'
     container_name: php_hms
   mysql:
-    container_name: mysql_hms
+    container_name: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
-    image: mysql:8.0
+    image: mariadb:10.5
     networks:
       - backend
     environment:
@@ -23,8 +23,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: hms
       MYSQL_PASSWORD: dev
-    ports:
-      - 3306:3306
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.8
     depends_on:
@@ -34,7 +32,7 @@ services:
     ports:
       - 3001:80
     environment:
-      PMA_HOST: mysql_hms
+      PMA_HOST: mysql
       PMA_PORT: 3306
     volumes:
       - /sessions

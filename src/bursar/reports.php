@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 	header("Location: ../index.php");
@@ -41,21 +41,21 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 			$day = date('d');
 			$month = date('m');
 			$year = date('Y');
-				
+
 				$sql = "SELECT sum(doctor_price) AS aa FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'";
-				$result = mysql_query($sql);
-				while ($row = mysql_fetch_array($result)) {
-					$sql1 = mysql_query("SELECT sum(test_price) AS bb FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
-					while ($row1 = mysql_fetch_array($sql1)) {
-						$sql2 =mysql_query("SELECT sum(medical_price) AS cc FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
+				$result = mysqli_query($con,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					$sql1 = mysqli_query($con,"SELECT sum(test_price) AS bb FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
+					while ($row1 = mysqli_fetch_array($sql1)) {
+						$sql2 =mysqli_query($con,"SELECT sum(medical_price) AS cc FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
 						while ($row2 = mysql_fetch_assoc($sql2)) {
 							$all = $row['aa'] + $row1['bb'] + $row2['cc'];
 							echo number_format($all);
 						}
-					
+
 					}
 
-					
+
 				}
 			?> Ugx</p>
 			<p><b>This Month:</b> <?php
@@ -63,21 +63,21 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 			$day = date('d');
 			$month = date('m');
 			$year = date('Y');
-				
+
 				$sql = "SELECT sum(doctor_price) AS aa FROM `medication` WHERE `month`='$month' AND `year`='$year'";
-				$result = mysql_query($sql);
-				while ($row = mysql_fetch_array($result)) {
-					$sql1 = mysql_query("SELECT sum(test_price) AS bb FROM `medication` WHERE `month`='$month' AND `year`='$year'");
-					while ($row1 = mysql_fetch_array($sql1)) {
-						$sql2 =mysql_query("SELECT sum(medical_price) AS cc FROM `medication` WHERE `month`='$month' AND `year`='$year'");
+				$result = mysqli_query($con,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					$sql1 = mysqli_query($con,"SELECT sum(test_price) AS bb FROM `medication` WHERE `month`='$month' AND `year`='$year'");
+					while ($row1 = mysqli_fetch_array($sql1)) {
+						$sql2 =mysqli_query($con,"SELECT sum(medical_price) AS cc FROM `medication` WHERE `month`='$month' AND `year`='$year'");
 						while ($row2 = mysql_fetch_assoc($sql2)) {
 							$all = $row['aa'] + $row1['bb'] + $row2['cc'];
 							echo number_format($all);
 						}
-					
+
 					}
 
-					
+
 				}
 			?></p>
 			<p><b>This Year:</b> <?php
@@ -85,21 +85,21 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 			$day = date('d');
 			$month = date('m');
 			$year = date('Y');
-				
+
 				$sql = "SELECT sum(doctor_price) AS aa FROM `medication` WHERE  `year`='$year'";
-				$result = mysql_query($sql);
-				while ($row = mysql_fetch_array($result)) {
-					$sql1 = mysql_query("SELECT sum(test_price) AS bb FROM `medication` WHERE `year`='$year'");
-					while ($row1 = mysql_fetch_array($sql1)) {
-						$sql2 =mysql_query("SELECT sum(medical_price) AS cc FROM `medication` WHERE `year`='$year'");
+				$result = mysqli_query($con,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					$sql1 = mysqli_query($con,"SELECT sum(test_price) AS bb FROM `medication` WHERE `year`='$year'");
+					while ($row1 = mysqli_fetch_array($sql1)) {
+						$sql2 =mysqli_query($con,"SELECT sum(medical_price) AS cc FROM `medication` WHERE `year`='$year'");
 						while ($row2 = mysql_fetch_assoc($sql2)) {
 							$all = $row['aa'] + $row1['bb'] + $row2['cc'];
 							echo number_format($all);
 						}
-					
+
 					}
 
-					
+
 				}
 			?> Ugx</p>
 		</div>
@@ -169,7 +169,7 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 			$day = trim(htmlspecialchars($_POST['day']));
 			$month = trim(htmlspecialchars($_POST['month']));
 			$year = trim(htmlspecialchars($_POST['year']));
-			
+
 
 			if (!empty($day) AND !empty($month) AND !empty($year)) {?>
 			<br><table class="table">
@@ -180,14 +180,14 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 					<th>Doctor Price</th>
 					<th>Test Price</th>
 					<th>Medical Price</th>
-				</tr>	
+				</tr>
 			</thead>
 			<tbody>
 			<?php
 				$sql = "SELECT * FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year' ORDER BY `patient_id` DESC";
-				 	$result = mysql_query($sql);
-				 	if (mysql_num_rows($result)> 0) {
-				 		while ($row = mysql_fetch_array($result)) {
+				 	$result = mysqli_query($con,$sql);
+				 	if (mysqli_num_rows($result)> 0) {
+				 		while ($row = mysqli_fetch_array($result)) {
 				 			echo "
 				 			<tr>
 				 				<td>".$row['patient_id']."</td>
@@ -208,19 +208,19 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 				<h3 align="center"><?php echo $day.'/'.$month.'/'.$year; ?> Sales:
 				<?php
 				$sql = "SELECT sum(doctor_price) AS aa FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'";
-				$result = mysql_query($sql);
-				while ($row = mysql_fetch_array($result)) {
-					$sql1 = mysql_query("SELECT sum(test_price) AS bb FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
-					while ($row1 = mysql_fetch_array($sql1)) {
-						$sql2 =mysql_query("SELECT sum(medical_price) AS cc FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
+				$result = mysqli_query($con,$sql);
+				while ($row = mysqli_fetch_array($result)) {
+					$sql1 = mysqli_query($con,"SELECT sum(test_price) AS bb FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
+					while ($row1 = mysqli_fetch_array($sql1)) {
+						$sql2 =mysqli_query($con,"SELECT sum(medical_price) AS cc FROM `medication` WHERE `date`='$day' AND `month`='$month' AND `year`='$year'");
 						while ($row2 = mysql_fetch_assoc($sql2)) {
 							$all = $row['aa'] + $row1['bb'] + $row2['cc'];
 							echo "is: <b>".number_format($all);
 						}
-					
+
 					}
 
-					
+
 				}
 			?>
 			 Tsh
@@ -234,10 +234,10 @@ if (empty($_SESSION['bursar']) OR empty($_SESSION['type'])) {
 		}
 		?>
 		</center>
-		
-			
+
+
 		</div>
-		<?php 
+		<?php
 		include "includes/footer.php";
 		 ?>
 	</div>

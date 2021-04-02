@@ -1,10 +1,12 @@
 <?php
-$con = mysql_connect('localhost','root','');
+if (file_exists('config/env.php')) {
+    require_once 'config/env.php';
+} else {
+    require_once '../config/env.php';
+}
+$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
 if (empty($con)) {
- 	echo mysql_error();
- } 
- $data = mysql_select_db("hospital");
- if (empty($data)) {
- 	echo mysql_error();
- }
-?>
+    echo mysqli_error($con);
+}
+

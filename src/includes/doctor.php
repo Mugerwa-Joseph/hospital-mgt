@@ -3,12 +3,12 @@ function recdoctor()
 {
 			$typee = $_SESSION['type'];
 			$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND `status`='recdoctor'";
-	$query = mysql_query($sql);
-	while ($row = mysql_fetch_array($query)) {
+	$query = mysqli_query($con,$sql);
+	while ($row = mysqli_fetch_array($query)) {
 		$ido = $row['patient_id'];
 		$sql2 = "SELECT * FROM `patient` WHERE `id`='$ido'";
-		$query2 = mysql_query($sql2);
-		while ($row2 = mysql_fetch_array($query2)) {
+		$query2 = mysqli_query($con,$sql2);
+		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
 			echo "<td>".$row2['id']."</td>";
 			echo "<td>".$row2['fname']."</td>";
@@ -17,7 +17,7 @@ function recdoctor()
 			echo "<td><center><a href='addsymptoms.php?id=".$row['id']."'>Add</a></center></td>";
 			echo "</tr>";
 		}
-		
+
 	}
 }
 
@@ -26,12 +26,12 @@ function labdoctor()
 {
 			$typee = $_SESSION['type'];
 			$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND `status`='labdoctor'";
-	$query = mysql_query($sql);
-	while ($row = mysql_fetch_array($query)) {
+	$query = mysqli_query($con,$sql);
+	while ($row = mysqli_fetch_array($query)) {
 		$ido = $row['patient_id'];
 		$sql2 = "SELECT * FROM `patient` WHERE `id`='$ido'";
-		$query2 = mysql_query($sql2);
-		while ($row2 = mysql_fetch_array($query2)) {
+		$query2 = mysqli_query($con,$sql2);
+		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
 			echo "<td>P-".$row2['id']."</td>";
 			echo "<td>".$row2['fname']."</td>";
@@ -40,7 +40,7 @@ function labdoctor()
 			echo "<td><center><a href='medicine.php?id=".$row['id']."'>view</a></center></td>";
 			echo "</tr>";
 		}
-		
+
 	}
 }
 
@@ -51,12 +51,12 @@ function searchpatients()
 			$fname = $_GET['s'];
 			$typee = $_SESSION['type'];
 			$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND `status`='recdoctor'";
-			$query = mysql_query($sql);
-			while ($row = mysql_fetch_array($query)) {
+			$query = mysqli_query($con,$sql);
+			while ($row = mysqli_fetch_array($query)) {
 				$ido = $row['patient_id'];
 				$sql2 = "SELECT * FROM `patient` WHERE `id`='$ido' AND `id` LIKE '%$fname%'";
-				$query2 = mysql_query($sql2);
-		while ($row2 = mysql_fetch_array($query2)) {
+				$query2 = mysqli_query($con,$sql2);
+		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
 			echo "<td>P-".$row2['id']."</td>";
 			echo "<td>".$row2['fname']."</td>";
@@ -65,7 +65,7 @@ function searchpatients()
 			echo "<td><center><a href='addsymptoms.php?id=".$row['id']."'>Add</a></center></td>";
 			echo "</tr>";
 		}
-		
+
 	}
 }
 
@@ -75,12 +75,12 @@ function searchnewpatients()
 			$fname = $_GET['s'];
 			$typee = $_SESSION['type'];
 			$sql = "SELECT * From `medication` WHERE `doctor_type`='$typee' AND `status`='labdoctor'";
-			$query = mysql_query($sql);
-			while ($row = mysql_fetch_array($query)) {
+			$query = mysqli_query($con,$sql);
+			while ($row = mysqli_fetch_array($query)) {
 				$ido = $row['patient_id'];
 				$sql2 = "SELECT * FROM `patient` WHERE `id`='$ido' AND `id` LIKE '%$fname%'";
-				$query2 = mysql_query($sql2);
-		while ($row2 = mysql_fetch_array($query2)) {
+				$query2 = mysqli_query($con,$sql2);
+		while ($row2 = mysqli_fetch_array($query2)) {
 			echo "<tr height=30px'>";
 			echo "<td>P-".$row2['id']."</td>";
 			echo "<td>".$row2['fname']."</td>";
@@ -89,7 +89,7 @@ function searchnewpatients()
 			echo "<td><center><a href='medicine.php?id=".$row['id']."'>View</a></center></td>";
 			echo "</tr>";
 		}
-		
+
 	}
 }
 
@@ -102,13 +102,13 @@ function addsymptoms()
 		@require_once "connect.php";
 
 		$sql = "UPDATE `medication` SET `status`='laboratory',`symptoms`='$symptoms',`tests`='$test' WHERE `id`='$id'";
-		$query = mysql_query($sql);
+		$query = mysqli_query($con,$sql);
 		if (!empty($query)) {
 			$day = date('d');
 			$month = date('m');
 			$year = date('Y');
 			$doctor = $_SESSION['doctor'];
-			$report = mysql_query("INSERT INTO `doctorreport` VALUES ('','$doctor','$id','$day','$month','$year')");
+			$report = mysqli_query($con,"INSERT INTO `doctorreport` VALUES ('','$doctor','$id','$day','$month','$year')");
 			echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Sent</b>";
 		}
 	}
@@ -122,16 +122,16 @@ function addmedicine()
 		@require_once "connect.php";
 
 		$sql = "UPDATE `medication` SET `status`='pharmacy',`medical`='$medicine' WHERE `id`='$id'";
-		$query = mysql_query($sql);
+		$query = mysqli_query($con,$sql);
 		if (!empty($query)) {
 			echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Sent</b>";
 		}
 		else{
-			echo mysql_error();
+			echo mysqli_error($con);
 		}
 	}
 	else{
-		echo mysql_error();
+		echo mysqli_error($con);
 	}
 }
 
@@ -149,12 +149,12 @@ function settings()
 		$pass = sha1($password);
 		$name = $_SESSION['doctor'];
 		$type = $_SESSION['type'];
-			
+
 				$sql = "UPDATE `users` SET `fname`='$fname',`sname`='$sname',`password`='$pass' WHERE `username`='$name' AND `type`='$type'";
-				$query = mysql_query($sql);
+				$query = mysqli_query($con,$sql);
 				if (!empty($query)) {
 					echo "<br><b style='color:#008080;font-size:14px;font-family:Arial;'>Succesifully Updated</b>";
 
-				}	
+				}
 		}
 	}
